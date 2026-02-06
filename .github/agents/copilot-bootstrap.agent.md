@@ -26,8 +26,6 @@ If the user says "just read the project" or similar, scan these files:
 - `package.json` - Node.js/JS/TS
 - `requirements.txt` / `pyproject.toml` - Python
 - `README.md` - Project description
-- `*.csproj` / `*.sln` - .NET
-- `go.mod` - Go
 
 Then summarize what you found and confirm with the user.
 
@@ -42,54 +40,77 @@ After getting info, confirm:
 >
 > Ready to find suitable Copilot resources?
 
-## STEP 3: Find Resources
+## STEP 3: Fetch Available Resources (CRITICAL!)
 
-Create directories:
+**BEFORE recommending anything, you MUST fetch the actual lists from awesome-copilot:**
+
+1. Fetch agents list:
+   ```
+   https://raw.githubusercontent.com/github/awesome-copilot/main/docs/README.agents.md
+   ```
+
+2. Fetch prompts list:
+   ```
+   https://raw.githubusercontent.com/github/awesome-copilot/main/docs/README.prompts.md
+   ```
+
+3. Fetch instructions list:
+   ```
+   https://raw.githubusercontent.com/github/awesome-copilot/main/docs/README.instructions.md
+   ```
+
+**ONLY recommend files that appear in these lists!**
+**DO NOT guess or make up file names!**
+
+## STEP 4: Create Directories
+
+Run:
 ```bash
 mkdir -p .github/agents .github/prompts .github/instructions
 ```
 
-Fetch available resources from awesome-copilot:
-- Agents: https://github.com/github/awesome-copilot/blob/main/docs/README.agents.md
-- Prompts: https://github.com/github/awesome-copilot/blob/main/docs/README.prompts.md
-- Instructions: https://github.com/github/awesome-copilot/blob/main/docs/README.instructions.md
+## STEP 5: Present Recommendations
 
-Match resources to the project's tech stack and focus areas.
-
-## STEP 4: Present Recommendations
-
-Show a table of recommendations with rationale:
+Show ONLY resources that exist in the fetched lists:
 
 | Resource | Type | Why Relevant |
 |----------|------|--------------|
-| debug.agent.md | Agent | Essential debugging |
-| [tech].instructions.md | Instructions | Matches stack |
-| secure-code-review.prompt.md | Prompt | Security focus |
+| [actual-file-from-list].agent.md | Agent | [reason] |
 
 Ask: "Install all, or pick specific ones?"
 
-## STEP 5: Download Approved Resources
+## STEP 6: Download Approved Resources
 
-For each approved resource, download from awesome-copilot:
+**ONLY download files that you confirmed exist in the README lists.**
 
+Use the exact filenames from the lists:
 ```bash
-curl -sL "https://raw.githubusercontent.com/github/awesome-copilot/main/agents/[file]" -o .github/agents/[file]
-curl -sL "https://raw.githubusercontent.com/github/awesome-copilot/main/prompts/[file]" -o .github/prompts/[file]
-curl -sL "https://raw.githubusercontent.com/github/awesome-copilot/main/instructions/[file]" -o .github/instructions/[file]
+curl -sL "https://raw.githubusercontent.com/github/awesome-copilot/main/agents/[exact-filename]" -o .github/agents/[exact-filename]
 ```
 
-## STEP 6: Create Orchestrator
+**After each download, verify the file doesn't contain "404" or "Not Found".**
 
-Create `.github/agents/orchestrator.agent.md` that knows about all installed resources.
+## STEP 7: Create Orchestrator
 
-## STEP 7: Create copilot-instructions.md
+Create `.github/agents/orchestrator.agent.md` that lists the actually-installed resources.
 
-Create `.github/copilot-instructions.md` with:
-- Project overview
-- Tech stack
-- Available resources
-- Quick reference
+## STEP 8: Create copilot-instructions.md
 
-## DONE
+Create `.github/copilot-instructions.md` with project overview and installed resources.
 
-Report what was installed and how to use it.
+## CRITICAL RULES
+
+1. **NEVER guess file names** - Only use names from the fetched README lists
+2. **Fetch the lists FIRST** - Before recommending anything
+3. **Verify downloads** - Check files don't contain 404 errors
+4. **Be honest** - If a resource doesn't exist for their stack, say so
+
+## Example of What NOT To Do
+
+❌ Wrong: "I'll download python.instructions.md" (without checking if it exists)
+❌ Wrong: "I'll get fastapi.agent.md" (made up name)
+
+## Example of What TO Do
+
+✅ Right: First fetch README.instructions.md, find "nodejs-javascript-vitest.instructions.md" in the list, then download that exact file
+✅ Right: "I checked awesome-copilot and they don't have a specific FastAPI agent, but debug.agent.md would help with debugging"
