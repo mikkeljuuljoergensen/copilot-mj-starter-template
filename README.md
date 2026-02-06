@@ -11,14 +11,14 @@ This template contains portable agents and prompts that bootstrap a complete Git
 2. Clone and open in VS Code
 3. In Copilot Chat, run:
    ```
-   @meta-agentic-project-scaffold Set up Copilot for this project
+   @copilot-bootstrap Set up Copilot for this project
    ```
 
 ### Option 2: Add to Existing Project
 ```bash
 mkdir -p .github/agents .github/prompts
 
-# Download the main scaffold agent
+# Download the main bootstrap agent
 curl -sL "https://raw.githubusercontent.com/YOUR_USERNAME/copilot-starter-template/main/.github/agents/copilot-bootstrap.agent.md" -o .github/agents/copilot-bootstrap.agent.md
 curl -sL "https://raw.githubusercontent.com/YOUR_USERNAME/copilot-starter-template/main/.github/agents/meta-agentic-project-scaffold.agent.md" -o .github/agents/meta-agentic-project-scaffold.agent.md
 
@@ -29,7 +29,7 @@ curl -sL "https://raw.githubusercontent.com/YOUR_USERNAME/copilot-starter-templa
 curl -sL "https://raw.githubusercontent.com/YOUR_USERNAME/copilot-starter-template/main/.github/prompts/suggest-awesome-github-copilot-prompts.prompt.md" -o .github/prompts/suggest-awesome-github-copilot-prompts.prompt.md
 ```
 
-Then run `@meta-agentic-project-scaffold` in VS Code Copilot Chat.
+Then run `@copilot-bootstrap Set up Copilot for this project` in VS Code Copilot Chat.
 
 ## What's Included
 
@@ -37,8 +37,8 @@ Then run `@meta-agentic-project-scaffold` in VS Code Copilot Chat.
 
 | Agent | Description |
 |-------|-------------|
-| `copilot-bootstrap.agent.md` | Portable bootstrapper that sets up complete Copilot ecosystem |
-| `meta-agentic-project-scaffold.agent.md` | Meta agent that pulls resources from awesome-copilot and creates workflows |
+| `copilot-bootstrap.agent.md` | **Primary entry point** - Portable bootstrapper that sets up complete Copilot ecosystem. Can delegate to meta-agentic-project-scaffold when needed. |
+| `meta-agentic-project-scaffold.agent.md` | Specialized agent for pulling resources from awesome-copilot and creating workflows |
 
 ### Prompts (`.github/prompts/`)
 
@@ -51,7 +51,7 @@ Then run `@meta-agentic-project-scaffold` in VS Code Copilot Chat.
 
 ## What You Get After Bootstrapping
 
-After running the scaffold, your project will have:
+After running the bootstrap, your project will have:
 
 | Resource Type | Count | Examples |
 |---------------|-------|----------|
@@ -64,21 +64,35 @@ Plus a customized **orchestrator** that coordinates everything!
 
 ## Commands
 
+### Primary Command
 | Command | Description |
 |---------|-------------|
-| `@meta-agentic-project-scaffold` | Full setup - pulls all relevant resources |
-| `@copilot-bootstrap` | Full setup with orchestrator creation |
+| `@copilot-bootstrap Set up Copilot for this project` | **Start here** - Full setup with orchestrator creation |
+
+### Additional Commands
+| Command | Description |
+|---------|-------------|
 | `@copilot-bootstrap minimal` | Core resources only |
+| `@copilot-bootstrap update` | Update existing resources |
+| `@meta-agentic-project-scaffold` | Direct access to resource pulling agent |
 | `/suggest-awesome-github-copilot-agents` | Find new agents to install |
 | `/suggest-awesome-github-copilot-prompts` | Find new prompts to install |
 | `/suggest-awesome-github-copilot-instructions` | Find new instructions to install |
 | `/suggest-awesome-github-copilot-collections` | Find collections to install |
 
+### After Setup - Daily Use
+| Command | Description |
+|---------|-------------|
+| `@orchestrator` | Coordinate complex tasks |
+| `@orchestrator full-review` | Complete code audit |
+| `@orchestrator perf-ux` | Performance & UX review |
+| `@orchestrator security` | Security audit |
+
 ## Workflow Examples
 
 ### Initial Project Setup
 ```
-@meta-agentic-project-scaffold Set up Copilot for this React/TypeScript project
+@copilot-bootstrap Set up Copilot for this project
 ```
 
 ### Keep Resources Updated
