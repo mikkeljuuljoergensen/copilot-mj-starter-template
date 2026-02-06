@@ -9,9 +9,9 @@ This template contains portable agents and prompts that bootstrap a complete Git
 ### Option 1: Use This Template
 1. Click **"Use this template"** → **"Create a new repository"**
 2. Clone and open in VS Code
-3. In Copilot Chat, run:
+3. In Copilot Chat, select **copilotBootstrap** from the agent list, then type:
    ```
-   @copilot-bootstrap Set up Copilot for this project
+   Set up Copilot for this project
    ```
 4. **Answer the questions** about your project
 5. Review and approve the recommended resources
@@ -31,7 +31,7 @@ curl -sL "https://raw.githubusercontent.com/YOUR_USERNAME/copilot-starter-templa
 curl -sL "https://raw.githubusercontent.com/YOUR_USERNAME/copilot-starter-template/main/.github/prompts/suggest-awesome-github-copilot-prompts.prompt.md" -o .github/prompts/suggest-awesome-github-copilot-prompts.prompt.md
 ```
 
-Then run `@copilot-bootstrap Set up Copilot for this project` in VS Code Copilot Chat.
+Then reload VS Code and select **copilotBootstrap** from the agent list.
 
 ## How It Works
 
@@ -40,11 +40,13 @@ The bootstrap agent **asks about your project first**, then finds suitable resou
 ```
 👋 Welcome to Copilot Bootstrap!
 
-Please tell me about your project:
-1. What is this project? (e.g., web app, API, CLI tool)
-2. What technologies are you using? (e.g., React, Python, Node.js)
-3. What's the main purpose?
-4. Any special focus areas? (e.g., accessibility, security)
+Tell me about your project:
+1. What type? (web app, API, CLI, library, mobile app)
+2. What tech? (React, Python, Node.js, .NET, etc.)
+3. Main purpose?
+4. Focus areas? (accessibility, security, testing)
+
+Or just describe it and I'll figure it out!
 ```
 
 Based on your answers, it will:
@@ -60,10 +62,10 @@ Based on your answers, it will:
 
 ### Agents (`.github/agents/`)
 
-| Agent | Description |
-|-------|-------------|
-| `copilot-bootstrap.agent.md` | **Primary entry point** - Asks about your project, finds suitable resources |
-| `meta-agentic-project-scaffold.agent.md` | Specialized agent for extensive awesome-copilot discovery |
+| Agent | How to Use | Description |
+|-------|------------|-------------|
+| `copilot-bootstrap.agent.md` | Select **copilotBootstrap** | Primary entry point - asks about project, finds resources |
+| `meta-agentic-project-scaffold.agent.md` | Select from list | Extensive awesome-copilot discovery |
 
 ### Prompts (`.github/prompts/`)
 
@@ -77,61 +79,59 @@ Based on your answers, it will:
 ## Commands
 
 ### Primary Command
+Select **copilotBootstrap** from the agent dropdown, then:
 ```
-@copilot-bootstrap Set up Copilot for this project
+Set up Copilot for this project
 ```
-Asks about your project, then recommends and installs suitable resources.
 
 ### With Context
 ```
-@copilot-bootstrap Set up Copilot for this React/TypeScript e-commerce app with focus on accessibility
+Set up Copilot for this React/TypeScript e-commerce app with focus on accessibility
 ```
-Provides context upfront, may ask follow-up questions.
-
-### Additional Commands
-| Command | Description |
-|---------|-------------|
-| `@copilot-bootstrap minimal` | Core resources only |
-| `@copilot-bootstrap update` | Update existing resources |
-| `/suggest-awesome-github-copilot-agents` | Find new agents |
-| `/suggest-awesome-github-copilot-prompts` | Find new prompts |
-| `/suggest-awesome-github-copilot-instructions` | Find new instructions |
-| `/suggest-awesome-github-copilot-collections` | Find collections |
 
 ### After Setup - Daily Use
-| Command | Description |
-|---------|-------------|
-| `@orchestrator` | Coordinate complex tasks |
-| `@orchestrator full-review` | Complete code audit |
+| Agent | Description |
+|-------|-------------|
+| **orchestrator** | Coordinate complex tasks |
 
 ## Example Setup Flow
 
 ```
-You: @copilot-bootstrap Set up Copilot for this project
+You: [Select copilotBootstrap] Set up Copilot for this project
 
-Bot: 👋 Welcome! Please tell me about your project...
+Bot: 👋 Welcome! Tell me about your project...
 
 You: This is a Python FastAPI backend for a health tracking app. 
      Focus on security and testing.
 
-Bot: 📋 Here's what I understand:
+Bot: 📋 Project Summary:
      - Type: API/Backend
      - Tech: Python, FastAPI
      - Focus: Security, Testing
      
-     Based on this, I recommend:
-     - debug.agent.md (debugging)
-     - python.instructions.md (Python standards)
-     - secure-code-review.prompt.md (security)
-     - generate-unit-tests.prompt.md (testing)
-     ...
-     
-     Would you like me to install all of these?
+     Ready to find suitable Copilot resources?
 
-You: Yes, install them all
+You: Yes
+
+Bot: Based on your project, I recommend:
+     | Resource | Type | Why Relevant |
+     |----------|------|--------------|
+     | debug.agent.md | Agent | Essential debugging |
+     | python.instructions.md | Instructions | Python standards |
+     | secure-code-review.prompt.md | Prompt | Security focus |
+     
+     Install all, or pick specific ones?
+
+You: Install all
 
 Bot: ✅ Done! Created orchestrator and copilot-instructions.md
 ```
+
+## Important Notes
+
+- **Agent names use camelCase**: The agent shows as `copilotBootstrap` in the list
+- **Reload VS Code** after adding agent files for them to appear
+- **Select from dropdown**: Click the agent dropdown in Copilot Chat to see available agents
 
 ## Documentation
 
